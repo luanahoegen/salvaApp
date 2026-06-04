@@ -1,9 +1,72 @@
-import { Text, View } from 'react-native';
+import { Link } from 'expo-router';
+import {
+  Image,
+  Text,
+  View,
+} from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { CustomButton } from '../components/CustomButton';
+import { CustomInput } from '../components/CustomInput';
+import { PasswordInput } from '../components/PasswordInput';
+import { styles } from '../styles/loginStyles';
+
 
 export default function Login() {
   return (
-    <View>
-      <Text>Tela de Login</Text>
-    </View>
+    <SafeAreaView style={styles.container}>
+      <Image
+        source={require('../assets/images/salva-logo.png')}
+        style={styles.logoImage}
+        resizeMode="contain"
+      />
+
+      <View style={styles.card}>
+          <View style={styles.titleContainer}>
+            <View style={styles.titleBar} />
+            <Text style={styles.title}>ACESSE SUA CONTA</Text>
+          </View>
+
+          <CustomInput
+            label="E-MAIL CORPORATIVO / PESSOAL"
+            labelStyle={styles.label}
+            placeholder="mestre@salvacraft.com.br"
+            containerStyle={styles.inputContainer}
+            inputStyle={styles.inputField}
+          />
+
+          <PasswordInput
+            label="SENHA"
+            labelStyle={styles.label}
+            placeholder="••••••••"
+            containerStyle={styles.inputContainer}
+            inputStyle={styles.inputField}
+            eyeStyle={styles.eye}
+          />
+
+          <CustomButton
+            title="ESQUECI MINHA SENHA"
+            textStyle={styles.forgotPassword}
+          />
+
+          <CustomButton
+            title="INICIAR SESSÃO →"
+            style={styles.loginButton}
+            textStyle={styles.loginButtonText}
+          />
+
+          <Text style={styles.registerText}>
+            Novo no universo Salva?{' '}
+            <Link href="/register" style={styles.registerLink}>
+              Cadastre-se aqui
+            </Link>
+          </Text>
+
+        <Text style={styles.footer}>
+          BEBA COM SABEDORIA. PRODUTO DESTINADO A
+          {'\n'}
+          MAIORES DE 18 ANOS.
+        </Text>
+      </View>
+    </SafeAreaView>
   );
 }
