@@ -10,8 +10,23 @@ import { CustomButton } from '../components/CustomButton';
 import { CustomInput } from '../components/CustomInput';
 import { PasswordInput } from '../components/PasswordInput';
 import { styles } from '../styles/registerStyles';
+import { useRegisterViewModel } from '../viewmodels/useRegisterViewModel';
 
 export default function Register() {
+  const {
+    name,
+    setName,
+    email,
+    setEmail,
+    birthDate,
+    setBirthDate,
+    password,
+    setPassword,
+    confirmPassword,
+    setConfirmPassword,
+    handleRegister,
+    isLoading,
+  } = useRegisterViewModel();
 
 return (
     <SafeAreaView style={styles.container}>
@@ -35,6 +50,8 @@ return (
                     placeholderTextColor="#404040"
                     containerStyle={styles.inputContainer}
                     inputStyle={styles.inputField}
+                    value={name}
+                    onChangeText={setName}
                 />
 
                 <CustomInput
@@ -45,6 +62,8 @@ return (
                     keyboardType="email-address"
                     containerStyle={styles.inputContainer}
                     inputStyle={styles.inputField}
+                    value={email}
+                    onChangeText={setEmail}
                 />
 
                 <CustomInput
@@ -53,6 +72,8 @@ return (
                     placeholder="dd/mm/aaaa"
                     containerStyle={styles.inputContainer}
                     inputStyle={styles.inputField}
+                    value={birthDate}
+                    onChangeText={setBirthDate}
                 />
 
                 <PasswordInput
@@ -63,6 +84,8 @@ return (
                     containerStyle={styles.inputContainer}
                     inputStyle={styles.inputField}
                     eyeStyle={styles.eye}
+                    value={password}
+                    onChangeText={setPassword}
                 />
 
                 <PasswordInput
@@ -73,12 +96,16 @@ return (
                     containerStyle={styles.inputContainer}
                     inputStyle={styles.inputField}
                     eyeStyle={styles.eye}
+                    value={confirmPassword}
+                    onChangeText={setConfirmPassword}
                 />
 
                 <CustomButton
                     title="CADASTRAR →"
                     style={styles.button}
                     textStyle={styles.buttonText}
+                    onPress={handleRegister}
+                    disabled={isLoading}
                 />
 
                 <Text style={styles.registerText}>

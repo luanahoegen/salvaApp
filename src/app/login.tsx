@@ -9,9 +9,13 @@ import { CustomButton } from '../components/CustomButton';
 import { CustomInput } from '../components/CustomInput';
 import { PasswordInput } from '../components/PasswordInput';
 import { styles } from '../styles/loginStyles';
-
+import { useLoginViewModel } from '../viewmodels/useLoginViewModel';
 
 export default function Login() {
+  const { 
+    email, setEmail, password, setPassword, handleLogin, handleForgotPassword, isLoading 
+  } = useLoginViewModel();
+
   return (
     <SafeAreaView style={styles.container}>
       <Image
@@ -32,6 +36,8 @@ export default function Login() {
             placeholder="mestre@salvacraft.com.br"
             containerStyle={styles.inputContainer}
             inputStyle={styles.inputField}
+            value={email}
+            onChangeText={setEmail}
           />
 
           <PasswordInput
@@ -41,17 +47,22 @@ export default function Login() {
             containerStyle={styles.inputContainer}
             inputStyle={styles.inputField}
             eyeStyle={styles.eye}
+            value={password}
+            onChangeText={setPassword}
           />
 
           <CustomButton
             title="ESQUECI MINHA SENHA"
             textStyle={styles.forgotPassword}
+            onPress={handleForgotPassword}
           />
 
           <CustomButton
-            title="INICIAR SESSÃO →"
+            title={isLoading ? "CARREGANDO..." : "INICIAR SESSÃO →"}
             style={styles.loginButton}
             textStyle={styles.loginButtonText}
+            onPress={handleLogin}
+            disabled={isLoading}
           />
 
           <Text style={styles.registerText}>

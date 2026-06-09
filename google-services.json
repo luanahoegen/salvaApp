@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "241403499557",
+    "project_id": "salva-app-13ad6",
+    "storage_bucket": "salva-app-13ad6.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:241403499557:android:c1befbb636e090e95c9bcc",
+        "android_client_info": {
+          "package_name": "salva.App"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAqSY-iMfuRiT_yXwGBlwzuwW1fV6XNjFo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
