@@ -1,6 +1,11 @@
-import { Link } from 'expo-router';
+import DateTimePicker, { DateTimePickerEvent } from '@react-native-community/datetimepicker';
+import { Link, useRouter } from 'expo-router';
+import { useEffect, useState } from 'react';
 import {
+    Alert,
     Image,
+    Platform,
+    Pressable,
     ScrollView,
     Text,
     View
@@ -20,13 +25,52 @@ export default function Register() {
     setEmail,
     birthDate,
     setBirthDate,
-    password,
+    password, 
     setPassword,
     confirmPassword,
     setConfirmPassword,
     handleRegister,
     isLoading,
-  } = useRegisterViewModel();
+        errorMessage,
+        successMessage,
+        clearErrorMessage,
+   } = useRegisterViewModel();
+
+    const router = useRouter();
+
+    const [birthDateText, setBirthDateText] = useState('');
+
+    const [showPicker, setShowPicker] = useState(false);
+
+    useEffect(() => {
+        if (!errorMessage) {
+            return;
+        }
+
+        Alert.alert('Erro no cadastro', errorMessage);
+        clearErrorMessage();
+    }, [errorMessage, clearErrorMessage]);
+
+    useEffect(() => {
+        if (!successMessage) {
+            return;
+        }
+
+        Alert.alert('Cadastro realizado', successMessage, [
+            { text: 'OK', onPress: () => router.push('/login') },
+        ]);
+    }, [successMessage]);
+
+    const onChangeDate = (event: DateTimePickerEvent, selectedDate?: Date) => {
+        setShowPicker(false);
+
+        if (event.type === 'set' && selectedDate) {
+            setBirthDate(selectedDate);
+            setBirthDateText(selectedDate.toLocaleDateString('pt-BR', { timeZone: 'UTC' }));
+        } else {
+            setShowPicker(false);
+        }
+    };
 
 return (
     <SafeAreaView style={styles.container}>
@@ -66,15 +110,28 @@ return (
                     onChangeText={setEmail}
                 />
 
-                <CustomInput
-                    label="DATA DE NASCIMENTO"
-                    labelStyle={styles.label}
-                    placeholder="dd/mm/aaaa"
-                    containerStyle={styles.inputContainer}
-                    inputStyle={styles.inputField}
-                    value={birthDate}
-                    onChangeText={setBirthDate}
-                />
+                {showPicker && (
+                    <DateTimePicker
+                        mode="date"
+                        display="spinner"
+                        value={birthDate || new Date()}
+                        onChange={onChangeDate}
+                        maximumDate={new Date()}
+                    />
+                )}
+
+                <Pressable onPress={() => setShowPicker(true)}>
+                    <CustomInput
+                        label="DATA DE NASCIMENTO"
+                        labelStyle={styles.label}
+                        placeholder="dd/mm/aaaa"
+                        containerStyle={styles.inputContainer}
+                        inputStyle={styles.inputField}
+                        value={birthDateText}
+                        editable={false}
+                        onPressIn={() => setShowPicker(true)}
+                    />
+                </Pressable>
 
                 <PasswordInput
                     label="SENHA"

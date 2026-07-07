@@ -1,38 +1,78 @@
+import axios from 'axios';
 import { useState } from 'react';
-import { useUserDatabase } from '../database/useUserDatabase'; // Importe o hook useUserDatabase
+import { registerUser } from '../services/registerService';
 
 export function useRegisterViewModel() {
   const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [birthDate, setBirthDate] = useState('');
+  const [email, setEmail] = useState('');  
+  const [birthDate, setBirthDate] = useState<Date | null>(null);
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  
-  const { create: createUser } = useUserDatabase(); 
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [successMessage, setSuccessMessage] = useState<string | null>(null);
 
   const handleRegister = async () => {
+    const normalizedName = name.trim();
+    const normalizedEmail = email.trim();
+
+    setErrorMessage(null);
+    setSuccessMessage(null);
+
+    if (!normalizedName) {
+      setErrorMessage('Por favor, preencha seu nome completo.');
+      return;
+    }
+    if (!normalizedEmail) {
+      setErrorMessage('Por favor, preencha seu e-mail.');
+      return;
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(normalizedEmail)) {
+      setErrorMessage('Informe um e-mail válido.');
+      return;
+    }
+    if (!birthDate) {
+      setErrorMessage('Por favor, preencha sua data de nascimento.');
+      return;
+    }
     if (password !== confirmPassword) {
-      console.log("As senhas não coincidem");
+      setErrorMessage('As senhas não coincidem.');
       return;
     }
 
     setIsLoading(true);
     try {
-      const hashedPassword = password; 
+      const hashedPassword = password;
 
       const newUser = {
-        nome_completo: name,
-        email: email,
-        senha_hash: hashedPassword,
-        data_nascimento: birthDate,
+        name: normalizedName,
+        email: normalizedEmail,
+        password: hashedPassword,
+        birthDate: birthDate?.toISOString().split('T')[0] || '',
       };
 
-      const result = await createUser(newUser);
-      console.log('Usuário cadastrado com sucesso. ID:', result.insertedId);
+      const resultMessage = await registerUser(newUser);
+      setSuccessMessage(resultMessage || 'Usuario cadastrado com sucesso.');
+      
+      setName('');
+      setEmail('');
+      setBirthDate(null);
+      setPassword('');
+      setConfirmPassword('');
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        setErrorMessage('Não foi possível cadastrar o usuário. Verifique se o backend está rodando.');
+        return;
+      }
+      setErrorMessage('Erro inesperado ao cadastrar.');
     } finally {
       setIsLoading(false);
     }
+  };
+
+  const clearErrorMessage = () => setErrorMessage(null);
+  const clearSuccessMessage = () => {
+    setSuccessMessage(null);
   };
 
   return {
@@ -48,5 +88,9 @@ export function useRegisterViewModel() {
     setConfirmPassword,
     handleRegister,
     isLoading,
+    errorMessage,
+    successMessage,
+    clearErrorMessage,
+    clearSuccessMessage,
   };
 }

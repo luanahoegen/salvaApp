@@ -4,7 +4,6 @@
     "slug": "salva-app",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
     "scheme": "salvaapp",
     "userInterfaceStyle": "automatic",
     "ios": {
@@ -13,34 +12,21 @@
     "android": {
       "package": "salva.App",
       "googleServicesFile": "./google-services.json",
-      "adaptiveIcon": {
-        "backgroundColor": "#E6F4FE",
-        "foregroundImage": "./assets/images/android-icon-foreground.png",
-        "backgroundImage": "./assets/images/android-icon-background.png",
-        "monochromeImage": "./assets/images/android-icon-monochrome.png"
-      },
       "predictiveBackGestureEnabled": false
     },
     "web": {
       "bundler": "metro",
-      "output": "static",
-      "favicon": "./assets/images/favicon.png"
+      "output": "static"
     },
     "plugins": [
       "expo-router",
       "@react-native-firebase/app",
       "@react-native-firebase/analytics",
-      [
-        "expo-splash-screen",
-        {
-          "image": "./assets/images/splash-icon.png",
-          "resizeMode": "contain",
-          "backgroundColor": "#ffffff"
-        }
-      ],
       "@react-native-firebase/auth",
       "expo-build-properties",
-      "expo-sqlite"
+      "expo-sqlite",
+      "expo-splash-screen",
+      "@react-native-community/datetimepicker"
     ],
     "experiments": {
       "typedRoutes": true

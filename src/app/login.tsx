@@ -1,6 +1,9 @@
-import { Link } from 'expo-router';
+import { Link, useRouter } from 'expo-router';
+import { useEffect } from 'react';
 import {
+  Alert,
   Image,
+  Platform,
   Text,
   View,
 } from 'react-native';
@@ -13,8 +16,36 @@ import { useLoginViewModel } from '../viewmodels/useLoginViewModel';
 
 export default function Login() {
   const { 
-    email, setEmail, password, setPassword, handleLogin, handleForgotPassword, isLoading 
+    email,
+    setEmail,
+    password,
+    setPassword,
+    handleLogin,
+    handleForgotPassword,
+    isLoading,
+    errorMessage,
+    successMessage,
+    clearErrorMessage,
+    clearSuccessMessage
   } = useLoginViewModel();
+
+  const router = useRouter();
+
+  useEffect(() => {
+    if (errorMessage) {
+      Alert.alert('Erro no login', errorMessage, [
+        { text: 'OK', onPress: clearErrorMessage }
+      ]);
+    }
+  }, [errorMessage]);
+
+  useEffect(() => {
+    if (successMessage) {
+      Alert.alert('Sucesso', successMessage, [
+        { text: 'OK', onPress: clearSuccessMessage }
+      ]);
+    }
+  }, [successMessage]);
 
   return (
     <SafeAreaView style={styles.container}>
