@@ -42,7 +42,13 @@ export default function Login() {
   useEffect(() => {
     if (successMessage) {
       Alert.alert('Sucesso', successMessage, [
-        { text: 'OK', onPress: clearSuccessMessage }
+        {
+          text: 'OK',
+          onPress: () => {
+            clearSuccessMessage();
+            router.replace('/(tabs)');
+          }
+        }
       ]);
     }
   }, [successMessage]);

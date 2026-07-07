@@ -26,8 +26,12 @@ export function useLoginViewModel() {
         password: password,
       });
       setSuccessMessage('Login realizado com sucesso!');
-    } catch (error) {
-       setErrorMessage('Não foi possível realizar o login. Verifique sua conexão.');
+    } catch (error: any) {
+      if (axios.isAxiosError(error) && error.response) {
+        setErrorMessage(error.response.data.error);
+      } else {
+        setErrorMessage('Não foi possível realizar o login. Verifique sua conexão.');
+      }
     } finally {
       setIsLoading(false);
     }

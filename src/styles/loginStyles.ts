@@ -77,6 +77,7 @@ export const styles = StyleSheet.create({
     inputField: {
         flex: 1,
         fontSize: 18,
+        color: '#FFFFFF',
     },
 
     eye: {
