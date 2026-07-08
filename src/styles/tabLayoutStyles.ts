@@ -6,11 +6,10 @@ export const tabLayoutOptions = {
   tabBarShowLabel: true,
   tabBarStyle: {
     backgroundColor: '#FFFFFF',
-    height: 75,
     borderTopWidth: 1,
     borderTopColor: '#E0E0E0',
-    paddingBottom: 15,
     paddingTop: 5,
+    paddingBottom: 5,
   },
   tabBarLabelStyle: {
     fontSize: 12,

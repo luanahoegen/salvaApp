@@ -4,6 +4,7 @@ import {
   Alert,
   Image,
   Platform,
+  ScrollView,
   Text,
   View,
 } from 'react-native';
@@ -55,66 +56,71 @@ export default function Login() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Image
-        source={require('../assets/images/salva-logo.png')}
-        style={styles.logoImage}
-        resizeMode="contain"
-      />
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={styles.scrollContent}
+      >
+        <Image
+          source={require('../assets/images/salva-logo.png')}
+          style={styles.logoImage}
+          resizeMode="contain"
+        />
 
-      <View style={styles.card}>
-          <View style={styles.titleContainer}>
-            <View style={styles.titleBar} />
-            <Text style={styles.title}>ACESSE SUA CONTA</Text>
-          </View>
+        <View style={styles.card}>
+            <View style={styles.titleContainer}>
+              <View style={styles.titleBar} />
+              <Text style={styles.title}>ACESSE SUA CONTA</Text>
+            </View>
 
-          <CustomInput
-            label="E-MAIL CORPORATIVO / PESSOAL"
-            labelStyle={styles.label}
-            placeholder="mestre@salvacraft.com.br"
-            containerStyle={styles.inputContainer}
-            inputStyle={styles.inputField}
-            value={email}
-            onChangeText={setEmail}
-          />
+            <CustomInput
+              label="E-MAIL CORPORATIVO / PESSOAL"
+              labelStyle={styles.label}
+              placeholder="mestre@salvacraft.com.br"
+              containerStyle={styles.inputContainer}
+              inputStyle={styles.inputField}
+              value={email}
+              onChangeText={setEmail}
+            />
 
-          <PasswordInput
-            label="SENHA"
-            labelStyle={styles.label}
-            placeholder="••••••••"
-            containerStyle={styles.inputContainer}
-            inputStyle={styles.inputField}
-            eyeStyle={styles.eye}
-            value={password}
-            onChangeText={setPassword}
-          />
+            <PasswordInput
+              label="SENHA"
+              labelStyle={styles.label}
+              placeholder="••••••••"
+              containerStyle={styles.inputContainer}
+              inputStyle={styles.inputField}
+              eyeStyle={styles.eye}
+              value={password}
+              onChangeText={setPassword}
+            />
 
-          <CustomButton
-            title="ESQUECI MINHA SENHA"
-            textStyle={styles.forgotPassword}
-            onPress={handleForgotPassword}
-          />
+            <CustomButton
+              title="ESQUECI MINHA SENHA"
+              textStyle={styles.forgotPassword}
+              onPress={handleForgotPassword}
+            />
 
-          <CustomButton
-            title={isLoading ? "CARREGANDO..." : "INICIAR SESSÃO →"}
-            style={styles.loginButton}
-            textStyle={styles.loginButtonText}
-            onPress={handleLogin}
-            disabled={isLoading}
-          />
+            <CustomButton
+              title={isLoading ? "CARREGANDO..." : "INICIAR SESSÃO →"}
+              style={styles.loginButton}
+              textStyle={styles.loginButtonText}
+              onPress={handleLogin}
+              disabled={isLoading}
+            />
 
-          <Text style={styles.registerText}>
-            Novo no universo Salva?{' '}
-            <Link href="/register" style={styles.registerLink}>
-              Cadastre-se aqui
-            </Link>
+            <Text style={styles.registerText}>
+              Novo no universo Salva?{' '}
+              <Link href="/register" style={styles.registerLink}>
+                Cadastre-se aqui
+              </Link>
+            </Text>
+
+          <Text style={styles.footer}>
+            BEBA COM SABEDORIA. PRODUTO DESTINADO A
+            {'\n'}
+            MAIORES DE 18 ANOS.
           </Text>
-
-        <Text style={styles.footer}>
-          BEBA COM SABEDORIA. PRODUTO DESTINADO A
-          {'\n'}
-          MAIORES DE 18 ANOS.
-        </Text>
-      </View>
+        </View>
+      </ScrollView>
     </SafeAreaView>
   );
 }
