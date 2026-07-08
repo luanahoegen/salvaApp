@@ -2887,6 +2887,18 @@ expo-glass-effect@^56.0.4:
   resolved "https://registry.npmjs.org/expo-glass-effect/-/expo-glass-effect-56.0.4.tgz"
   integrity sha512-xI9rXtDwi7RW82uAlfyaXO6+k21ApWJ2tHAWYqPr/FjfmZbKsgNJ4Q0iZzGPCwboqjTGxaRZ61SZxBl8hDt5iA==
 
+expo-image-loader@~56.0.3:
+  version "56.0.3"
+  resolved "https://registry.yarnpkg.com/expo-image-loader/-/expo-image-loader-56.0.3.tgz#665112665e78d0fd9629f6160e2ca419d7f0c5c6"
+  integrity sha512-JgUo4fUeU1ZC+z8iBFj8v7yoGQnZrLbOVPyNE+DWVrld55F2F6R1ck+rmdm/8TNWLz1LhNQfD7c3XYP1ZikxXA==
+
+expo-image-picker@~56.0.20:
+  version "56.0.20"
+  resolved "https://registry.yarnpkg.com/expo-image-picker/-/expo-image-picker-56.0.20.tgz#e1682c27f70f70c2bf7d5a71e184fb20652578bf"
+  integrity sha512-75xP7WA7Z8b4+5wYCu1cISg90Cu9CowneGMFuAgmmpNxCXLnBbrJXO6XqYIM69KAjEv7PApjgQF3h6RdBqus4w==
+  dependencies:
+    expo-image-loader "~56.0.3"
+
 expo-keep-awake@~56.0.3:
   version "56.0.3"
   resolved "https://registry.npmjs.org/expo-keep-awake/-/expo-keep-awake-56.0.3.tgz"
