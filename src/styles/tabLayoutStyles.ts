@@ -17,7 +17,6 @@ export const tabLayoutOptions = {
     fontWeight: 'bold',
     marginTop: -5,
   },
-  headerShown: false,
 };
 
 export const styles = StyleSheet.create({

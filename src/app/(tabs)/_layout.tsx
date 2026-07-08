@@ -5,7 +5,12 @@ import { tabLayoutOptions } from '../../styles/tabLayoutStyles';
 
 export default function TabLayout() {
   return (
-    <Tabs screenOptions={tabLayoutOptions}>
+    <Tabs
+      screenOptions={{
+        ...tabLayoutOptions,
+        headerShown: false,
+      }}
+    >
       <Tabs.Screen
         name="index"
         options={{
