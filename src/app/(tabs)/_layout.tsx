@@ -29,6 +29,15 @@ export default function TabLayout() {
           ),
         }}
       />
+      <Tabs.Screen
+        name="eventos"
+        options={{
+          title: 'EVENTOS',
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="calendar-clock" color={color} size={24} />
+          ),
+        }}
+      />
     </Tabs>
   );
 }
